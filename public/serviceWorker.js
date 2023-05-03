@@ -1,8 +1,9 @@
 const CACHE_NAME = 'version-3'
 const assetUrls = [
     'index.html',
-    // 'index.js',
+    // 'offline.html'
 ]
+
 
 
 async function cacheFirst(request) {
@@ -10,9 +11,14 @@ async function cacheFirst(request) {
     return cached ?? await fetch(request)
 }
 
-this.addEventListener('install', async (event) => {
-    const cache = await caches.open(CACHE_NAME)
-    await cache.addAll(assetUrls)
+this.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then((cache) => {
+                return cache.addAll(assetUrls)
+            })
+    )
+
 })
 
 this.addEventListener('activate', async (event) => {
