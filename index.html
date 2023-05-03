@@ -11,17 +11,15 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      console.log("hello bly");
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", async () => {
-          try {
-            const reg = await navigator.serviceWorker.register(
-              "./serviceWorker.js"
-            );
-            console.log("worker WORK!", reg);
-          } catch (e) {
-            console.log("worker ERR!:", e.message);
-          }
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./serviceWorker.js")
+            .then((reg) => {
+              console.log("worker WORK!", reg);
+            })
+            .catch((e) => {
+              console.log(e, "Error");
+            });
         });
       }
     </script>

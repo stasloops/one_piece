@@ -7,7 +7,7 @@ const assetUrls = [
 
 async function cacheFirst(request) {
     const cached = await caches.match(request)
-    return cached || await fetch(request)
+    return cached ?? await fetch(request)
 }
 
 this.addEventListener('install', async (event) => {
