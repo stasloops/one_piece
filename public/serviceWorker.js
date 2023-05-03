@@ -1,7 +1,7 @@
 const CACHE_NAME = 'version-3'
 const assetUrls = [
-    'index.html',
-    // 'offline.html'
+    // 'index.html',
+    'assets',
 ]
 
 
@@ -18,8 +18,13 @@ this.addEventListener('install', (event) => {
                 return cache.addAll(assetUrls)
             })
     )
-
 })
+
+
+this.addEventListener('fetch', (event) => {
+    event.respondWith(cacheFirst(event.request))
+})
+
 
 this.addEventListener('activate', async (event) => {
     const cacheNames = await caches.keys()
@@ -29,8 +34,4 @@ this.addEventListener('activate', async (event) => {
     )
 })
 
-
-this.addEventListener('fetch', (event) => {
-    event.respondWith(cacheFirst(event.request))
-})
 
