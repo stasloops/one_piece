@@ -1,6 +1,7 @@
 const CACHE_NAME = 'version-3'
 const assetUrls = [
     'index.html',
+    // 'index.js',
 ]
 
 

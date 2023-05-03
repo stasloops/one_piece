@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <h1>One Piece11</h1>
+      <h1>One Piece Card</h1>
     </div>
   );
 }
