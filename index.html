@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#242424" />
     <title>One Piece</title>
-    <link rel="manifest" href="/public/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      console.log('hello bly');
+      console.log("hello bly");
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("./serviceWorker.js")
-            .then((req) => {
-              console.log("worker reg");
-            })
-            .catch((err) => {
-              console.log("worker err:", err.message);
-            });
+        window.addEventListener("load", async () => {
+          try {
+            const reg = await navigator.serviceWorker.register(
+              "./serviceWorker.js"
+            );
+            console.log("worker WORK!", reg);
+          } catch (e) {
+            console.log("worker ERR!:", e.message);
+          }
         });
       }
     </script>

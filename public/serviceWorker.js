@@ -1,30 +1,25 @@
 const CACHE_NAME = 'version-1'
-const urlsToCache = ["index.html", "offline.html"]
+const assetsUrls = [
+    'index.html',
+    // '/index.js',
+]
 
-this.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            console.log("Open cache: " + cache);
-            return cache.addAll(urlsToCache)
-        })
-    )
+this.addEventListener('install', async (event) => {
+    const cache = await caches.open(CACHE_NAME)
+    await cache.addAll(assetsUrls)
 })
 
-this.addEventListener("fetch", (event) => {
-    event.respondWidth(
-        caches.match(event.request).then((res) => {
-            return fetch(event.request).catch(() => caches.match('offline.html'))
-        })
-    )
+this.addEventListener('activate', (event) => {
+    // console.log('[SW]: activate');
 })
 
-// this.addEventListener('activate', (event) => {
-//     const cacheWhiteList = []
-//     cacheWhiteList.push(CACHE_NAME)
 
-//     event.waitUntil(caches.keys().then((cacheNames) => Promise.all(cacheNames.map((cacheName) => {
-//         if(!cacheWhiteList.includes(cacheName)) {
-//             return caches.delete(cacheName)
-//         }
-//     }))))
-// })
+
+this.addEventListener('fetch', (event) => {
+    event.respondWith(cacheFirst(event.request))
+})
+
+async function cacheFirst(request) {
+    const cached = await caches.match(request)
+    return cached ?? await fetch(request)
+}
