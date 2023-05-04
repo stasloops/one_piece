@@ -1,0 +1,30 @@
+.bounty {
+    width: 25%;
+    /* background-color: rgba(0, 0, 0, 0.537); */
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(23, 23, 23, 0.300) 30%, rgba(0, 0, 0, 0.300) 45%);
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+
+    /* filter: drop-shadow(0 0 50px #FF7F50); */
+}
+
+.bounty__icon {
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    display: inline-block;
+    /* color: #fff; */
+    color: #ac926d;
+    width: 14px;
+    height: 21px;
+}
+
+.bounty__value {
+    font-size: 16px;
+    margin-left: 5px;
+    font-weight: 700;
+}

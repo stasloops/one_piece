@@ -1,0 +1,34 @@
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.menu__box {
+    display: flex;
+}
+
+.menu__item {
+    box-sizing: border-box;
+    width: 20%;
+    height: 60px;
+    border: 1px solid rgb(82, 82, 82);
+    border-width: 1px 1px 0 1px;
+    background-color: rgb(40, 40, 40);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.2s;
+}
+
+
+.menu__icon {
+    stroke-width: 0;
+    stroke: currentColor;
+    display: inline-block;
+    width: 40px;
+    /* height: 21px; */
+}

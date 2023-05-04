@@ -1,0 +1,30 @@
+.gem {
+    width: 24%;
+    background-color: rgba(0, 0, 0, 0.283);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.gem__box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.gem__icon {
+    position: absolute;
+    left: -23px;
+    top: -5px;
+
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    display: inline-block;
+    width: 30px;
+}
+
+.gem__value {
+    font-size: 16px;
+    margin-left: 10px;
+    font-weight: 700;
+}
