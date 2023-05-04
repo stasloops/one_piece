@@ -1,3 +1,9 @@
+.app {
+  overflow: hidden;
+  max-height: 100vh;
+  position: relative;
+}
+
 .app__background_image {
   position: absolute;
   z-index: -2;

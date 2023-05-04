@@ -1,0 +1,19 @@
+.pages {
+    position: relative;
+    width: 500vw;
+    height: 100vh;
+
+}
+
+.pages__box {
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    display: flex;
+    transition: 0.5s;
+}
+
+.pages__item {
+    width: 100vw;
+
+}

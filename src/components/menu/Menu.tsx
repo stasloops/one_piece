@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import "../../styles/components/menu/menu.css";
 
 const cards = (
@@ -190,13 +190,19 @@ const cards = (
 );
 
 const MENUITEMS = [1, 2, 3, 4, 5];
-const Menu = () => {
+
+interface Props {
+  setActiveMenuItem: (id: number) => void;
+}
+
+const Menu: FC<Props> = ({ setActiveMenuItem }) => {
   const [isActive, setIsActive] = useState<number>(3);
 
   const getIsActive = (id: number) => {
     setIsActive(id);
+    setActiveMenuItem(id);
   };
-  
+
   return (
     <div className="menu">
       <div className="menu__box">
