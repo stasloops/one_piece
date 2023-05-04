@@ -192,15 +192,17 @@ const cards = (
 const MENUITEMS = [1, 2, 3, 4, 5];
 
 interface Props {
-  setActiveMenuItem: (id: number) => void;
+  api: any;
 }
 
-const Menu: FC<Props> = ({ setActiveMenuItem }) => {
+const Menu: FC<Props> = ({ api }) => {
   const [isActive, setIsActive] = useState<number>(3);
 
   const getIsActive = (id: number) => {
     setIsActive(id);
-    setActiveMenuItem(id);
+    api.start(() => {
+      return {left: id !== 1 ? `-${id - 1}00vw` : '0vw'}
+    });
   };
 
   return (

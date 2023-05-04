@@ -1,9 +1,7 @@
 import {
   animated,
-  useSpring,
   useSprings,
   to as interpolate,
-  to,
 } from "@react-spring/web";
 import "../../styles/components/home/cards.css";
 

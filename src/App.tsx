@@ -5,15 +5,17 @@ import Top from "./components/top/Top";
 import Menu from "./components/menu/Menu";
 import Pages from "./pages/Pages";
 import { useState } from "react";
+import { useSpring } from "@react-spring/web";
 
 function App() {
-  const [activeMenuItem, setActiveMenuItem] = useState(3);
+  const [props, api] = useSpring(() => ({from: {left: '-200vw'}}))
+
   return (
     <div className="app">
       <Top />
       {/* <img className="app__background_image" src={cardImage} /> */}
-      <Pages activeMenuItem={activeMenuItem} />
-      <Menu setActiveMenuItem={setActiveMenuItem} />
+      <Pages props={props} />
+      <Menu api={api} />
     </div>
   );
 }

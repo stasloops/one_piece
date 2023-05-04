@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Home from "./Home";
 import "../styles/pages/pages.css";
+import { animated } from "@react-spring/web";
 
 const pages = [
   { id: 1, page: <Home /> },
@@ -11,14 +12,14 @@ const pages = [
 ];
 
 interface Props {
-  activeMenuItem: number;
+  props: any;
 }
 
-const Pages: FC<Props> = ({ activeMenuItem }) => {
+const Pages: FC<Props> = ({ props }) => {
   return (
     <div className="pages">
-      <div
-        style={{ left: `-${activeMenuItem - 1}00vw` }}
+      <animated.div
+        style={{ ...props }}
         className="pages__box"
       >
         {pages.map((page) => (
@@ -27,7 +28,7 @@ const Pages: FC<Props> = ({ activeMenuItem }) => {
             {page.page}
           </div>
         ))}
-      </div>
+      </animated.div>
     </div>
   );
 };
