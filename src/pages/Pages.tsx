@@ -4,11 +4,11 @@ import "../styles/pages/pages.css";
 import { animated } from "@react-spring/web";
 
 const pages = [
-  { id: 1, page: <Home /> },
-  { id: 2, page: <Home /> },
-  { id: 3, page: <Home /> },
-  { id: 4, page: <Home /> },
-  { id: 5, page: <Home /> },
+  { id: 1, page: <Home />, bg: 'red' },
+  { id: 2, page: <Home />, bg: 'blue'},
+  { id: 3, page: <Home />, bg: 'orange' },
+  { id: 4, page: <Home />, bg: 'green' },
+  { id: 5, page: <Home />, bg: 'yellow' },
 ];
 
 interface Props {
@@ -23,7 +23,7 @@ const Pages: FC<Props> = ({ props }) => {
         className="pages__box"
       >
         {pages.map((page) => (
-          <div className="pages__item">
+          <div style={{backgroundColor: page.bg}} className="pages__item">
             {page.id}
             {page.page}
           </div>
