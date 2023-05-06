@@ -1,6 +1,7 @@
+// @ts-nocheck
 import axios from "axios";
 import React, { useState } from "react";
-import { Helmet } from "react-helmet";
+import TelegramLoginButton from 'react-telegram-login';
 
 const TelegramBtn = () => {
   const [obj, setobj] = useState<any>();
@@ -27,20 +28,13 @@ const TelegramBtn = () => {
     console.log(user);
   };
 
+  const handleTelegramResponse = (response:any) => {
+    console.log(response);
+  };
+ 
+  
   return (
-    <Helmet>
-     <script
-      async
-      src="https://telegram.org/js/telegram-widget.js?22"
-      data-telegram-login="onetest_piece_bot"
-      data-size="large"
-      data-onauth="onTelegramAuth(user)"
-      data-request-access="write"
-    ></script>
-    <script type="text/javascript">
-     
-    </script>
-    </Helmet>
+    <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="OdauBot" />
   );
 };
 
