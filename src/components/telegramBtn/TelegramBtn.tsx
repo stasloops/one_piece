@@ -9,7 +9,7 @@ const TelegramBtn = () => {
     const data = {
       name: loginData.first_name,
       hash: loginData.hash,
-      telegramId: loginData.id,
+      telegram_id: loginData.id,
       photo_url: loginData.photo_url,
     };
     $request.post("/user/login", data);
