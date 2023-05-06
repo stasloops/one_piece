@@ -34,8 +34,8 @@ const TelegramBtn = () => {
  
   
   return (
-    <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="OdauBot" />
-  );
+    <TelegramLoginButton dataOnauth={handleTelegramResponse} botName="onetest_piece_bot" />
+  )
 };
 
 export default TelegramBtn;
