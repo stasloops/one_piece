@@ -40,6 +40,7 @@ const TelegramBtn = () => {
       ></script>
       <button onClick={login}>Login</button>
       {obj}
+      <div dangerouslySetInnerHTML={{ __html: obj }}></div>;
     </>
   );
 };
