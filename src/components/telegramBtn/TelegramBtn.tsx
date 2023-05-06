@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 
 const TelegramBtn = () => {
   const [obj, setobj] = useState<any>();
@@ -28,20 +28,19 @@ const TelegramBtn = () => {
   };
 
   return (
-    <>
-      {/* <Helmet> */}
-      <script
-        async
-        src="https://telegram.org/js/telegram-widget.js?22"
-        data-telegram-login="onetest_piece_bot"
-        data-size="large"
-        data-onauth={(user: any) => onTelegramAuth(user)}
-        data-request-access="write"
-      ></script>
-      <button onClick={login}>Login</button>
-      {obj}
-      <div dangerouslySetInnerHTML={{ __html: obj }}></div>;
-    </>
+    <Helmet>
+     <script
+      async
+      src="https://telegram.org/js/telegram-widget.js?22"
+      data-telegram-login="onetest_piece_bot"
+      data-size="large"
+      data-onauth="onTelegramAuth(user)"
+      data-request-access="write"
+    ></script>
+    <script type="text/javascript">
+     
+    </script>
+    </Helmet>
   );
 };
 
