@@ -1,30 +1,9 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 // import { Helmet } from "react-helmet";
 
 const TelegramBtn = () => {
-  //     const a =  <script
-  //     async
-  //     src="https://telegram.org/js/telegram-widget.js?22"
-  //     data-telegram-login="onetest_piece_bot"
-  //     data-size="large"
-  //     data-onauth="onTelegramAuth(user)"
-  //     data-request-access="write"
-  //   ></script>
-  //   <script type="text/javascript">
-  //     function onTelegramAuth(user) {
-  //       alert(
-  //         "Logged in as " +
-  //           user.first_name +
-  //           " " +
-  //           user.last_name +
-  //           " (" +
-  //           user.id +
-  //           (user.username ? ", @" + user.username : "") +
-  //           ")"
-  //       );
-  //     }
-  //   </script>
+  const [obj, setobj] = useState<any>();
 
   const login = async () => {
     const bodyFormData = new FormData();
@@ -40,6 +19,7 @@ const TelegramBtn = () => {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
+    setobj(res.data.html);
     console.log(res);
   };
 
@@ -59,6 +39,7 @@ const TelegramBtn = () => {
         data-request-access="write"
       ></script>
       <button onClick={login}>Login</button>
+      {obj}
     </>
   );
 };
