@@ -1,65 +1,81 @@
-import {
-  animated,
-  useSprings,
-  to as interpolate,
-} from "@react-spring/web";
-import "../../styles/components/home/cards.css";
+import { animated, useSpring, useSprings } from "@react-spring/web";
+import "../../styles/components/home/newCards.css";
+import cardImage from "../../assets/card.jpg";
+import CardItem from "./CardItem";
+import { useState } from "react";
+import { $request } from "../../api/request";
+import { useUser } from "../../hooks/useUser";
 
-const arr: any[] = [1, 2, 3, 4, 5];
+const arr: string[] = [];
 
-// const arr: string[] = [];
+for (let i = 0; i < 5; i++) {
+  arr.push(cardImage);
+}
 
-// for (let i = 0; i < 5; i++) {
-//   arr.push(cardImage);
-// }
+const to = (i: number) => ({
+  x: 0,
+  y: i * -4,
+  scale: 1,
+  rot: -10 + Math.random() * 10,
+  delay: i * 150,
+});
+
+const from = (_i: number) => ({ x: 0, rot: 0, scale: 2, y: -1000 });
 
 const NewCards = () => {
+  const userData: any = useUser();
+
+  const [droppedCardInfo, setDroppedCardInfo] = useState<any>({});
+  const [droppedСardProps, droppedСardApi] = useSpring(() => ({
+    from: { y: -1000 },
+  }));
   const [props, api] = useSprings(arr.length, (i) => ({
-    from: { x: 0, y: -1000, backgroundColor: "#000", scale: 2, rot: 0 },
-    to: {
-      x: 0,
-      y: i * -30,
-      backgroundColor: "#922e2e",
-      delay: i * 100,
-      scale: 1,
-      rot: -10 + Math.random() * 20,
-    },
+    from: from(i),
+    ...to(i),
   }));
 
-  const trowCard = (index: number) => {
-    api.start((i: number) => {
-      if (i === index) {
-        return {
-          x: props[i].x.get() === 200 ? 0 : 200,
-        };
-      }
-    });
+  const getAdding = async () => {
+    const res = await $request.get("/cards/adding");
+    if (res.data.message) {
+      return console.log(res.data.message);
+    }
+    userData?.setUser(res.data);
   };
 
-  const trans = (r: number, s: number) =>
-    `perspective(1500px) rotateX(30deg) rotateY(${
-      r / 10
-    }deg) rotateZ(${r}deg)  scale(${s})`;
+  const openNewCard = async () => {
+    await getAdding();
+
+    const res = await $request.get("/cards/open");
+    if (res.data.message) {
+      return console.log(res.data.message);
+    }
+    console.log("Тебе выпало:", res.data.card);
+    setDroppedCardInfo(res.data.card);
+    userData?.setUser(res.data.user);
+  };
+
+  const cleanupDroppedCard = () => {
+    droppedСardApi.start(() => ({ y: 0, x: -1000 }));
+  };
 
   return (
-    <div>
-      {props.map(({ x, y, backgroundColor, rot, scale }, i) => (
-        <animated.div
+    <div className="cards">
+      <animated.div
+        onClick={cleanupDroppedCard}
+        className="cards__dropdown_card"
+        style={{ ...droppedСardProps }}
+      >
+        {droppedCardInfo.name} - {droppedCardInfo.rarity} - {droppedCardInfo.id}
+      </animated.div>
+      {props.map((props, i) => (
+        <CardItem
+          droppedСardApi={droppedСardApi}
+          openNewCard={openNewCard}
+          props={props}
+          index={i}
+          api={api}
           key={i}
-          className="deck"
-          onClick={() => trowCard(i)}
-          style={{
-            // border: "1px solid #000",
-            width: "40px",
-            height: "40px",
-            backgroundColor,
-            y,
-            x,
-            transform: interpolate([rot, scale], trans),
-          }}
-        >
-          {i}
-        </animated.div>
+        />
       ))}
     </div>
   );

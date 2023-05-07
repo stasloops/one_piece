@@ -3,23 +3,18 @@ import Top from "./components/top/Top";
 import Menu from "./components/menu/Menu";
 import Pages from "./pages/Pages";
 import { useSpring } from "@react-spring/web";
-import TelegramBtn from "./components/telegramBtn/TelegramBtn";
+import { UserProvider } from "./hooks/useUser";
 
 function App() {
   const [props, api] = useSpring(() => ({ from: { left: "-200vw" } }));
-  const isAuth = false;
+
   return (
     <div className="app">
-      {
-        isAuth ?
-        <>
-          <Top />
-          <Pages props={props} />
-          <Menu api={api} />
-        </>
-        :
-        <TelegramBtn />
-      }
+      <UserProvider>
+        <Top />
+        <Pages props={props} />
+        <Menu api={api} />
+      </UserProvider>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { useUser } from "../../hooks/useUser";
 import "../../styles/components/top/gem.css";
 
 const gem = (
@@ -30,11 +31,12 @@ const gem = (
   </svg>
 );
 const Gem = () => {
+  const userData: any = useUser();
   return (
     <div className="gem">
       <div className="gem__box">
         <span className="gem__icon">{gem}</span>
-        <span className="gem__value">1000</span>
+        <span className="gem__value">{userData?.user?.balance}</span>
       </div>
     </div>
   );

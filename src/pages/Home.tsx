@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import AvailableForOpeningCards from "../components/availableForOpeningCards/AvailableForOpeningCards";
 import { Deck } from "../components/home/Cards";
 import NewCards from "../components/home/NewCards";
 
@@ -10,11 +11,13 @@ const Home = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
         height: "70vh",
       }}
     >
-      <Deck />
-      {/* <NewCards /> */}
+      {/* <Deck /> */}
+      <NewCards />
+      <AvailableForOpeningCards />
     </div>
   );
 };

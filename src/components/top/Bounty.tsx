@@ -1,4 +1,5 @@
 import React from "react";
+import { useUser } from "../../hooks/useUser";
 import "../../styles/components/top/bounty.css";
 
 const bely = (
@@ -22,10 +23,11 @@ const bely = (
 );
 
 const Bounty = () => {
+  const userData: any = useUser();
   return (
     <div className="bounty">
       <span className="bounty__icon">{bely}</span>
-      <span className="bounty__value">100000</span>
+      <span className="bounty__value">{userData?.user?.bounty}</span>
     </div>
   );
 };

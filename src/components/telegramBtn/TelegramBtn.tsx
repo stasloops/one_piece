@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import TelegramLoginButton from "react-telegram-login";
-import { $request } from "../../request/request";
+import { $request } from "../../api/request";
 
 const TelegramBtn = () => {
   const login = async (loginData: any) => {
