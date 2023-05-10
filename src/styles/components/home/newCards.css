@@ -28,9 +28,9 @@
 }
 
 .cards__item_box {
-    /* background-size: auto 85%;
+    background-size: auto 85%;
     background-repeat: no-repeat;
-    background-position: center center; */
+    background-position: center center;
     width: 45vh;
     max-width: 150px;
     height: 75vh;
@@ -52,9 +52,9 @@
 }
 
 .cards__dropdown_card_box {
-    /* background-size: auto 85%;
+    background-size: auto 85%;
     background-repeat: no-repeat;
-    background-position: center center; */
+    background-position: center center;
     width: 45vh;
     max-width: 150px;
     height: 75vh;

@@ -44,24 +44,21 @@ const DropDownCard: FC<Props> = ({
 
   return (
     <animated.div
-      className="cards__dropdown_card"
-      style={{ ...droppedСardProps }}
+      className="cards__item"
+      style={{ zIndex: 20, ...droppedСardProps }}
     >
       <animated.div
-        className="cards__dropdown_card_box"
+        className="cards__item_box"
         onClick={cleanupDroppedCard}
+        {...bind()}
         style={{
+          backgroundImage: `url(${droppedCardInfo.image_url})`,
           transform: interpolate(
             [droppedСardProps.rot, droppedСardProps.scale],
             trans
           ),
         }}
       >
-        <animated.img
-          {...bind()}
-          className="cards__dropdown_card_img"
-          src={droppedCardInfo.image_url}
-        />
         {droppedCardInfo.name} - {droppedCardInfo.rarity} - {droppedCardInfo.id}
       </animated.div>
     </animated.div>

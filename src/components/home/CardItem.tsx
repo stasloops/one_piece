@@ -4,7 +4,6 @@ import { animated, to as interpolate } from "@react-spring/web";
 import cardImage from "../../assets/card.jpg";
 import { useUser } from "../../hooks/useUser";
 
-
 const arr: string[] = [];
 for (let i = 0; i < 15; i++) {
   arr.push(cardImage);
@@ -26,7 +25,7 @@ const CardItem: FC<Props> = ({
 }) => {
   const { x, y, rot, scale } = props;
   const userData: any = useUser();
-  
+
   const bind = useDrag(({ down, movement: [mx], swipe: [swipeX] }) => {
     api.start((i: any) => {
       if (i !== index) {
@@ -35,7 +34,7 @@ const CardItem: FC<Props> = ({
       return {
         x: swipeX !== 0 ? (swipeX < 0 ? -500 : 500) : down ? mx : 0,
         scale: down ? 1.1 : 1,
-        rot: 0
+        rot: 0,
       };
     });
 
@@ -67,15 +66,14 @@ const CardItem: FC<Props> = ({
     >
       <animated.div
         className="cards__item_box"
+        {...bind()}
         style={{
-          //   border: "1px solid #000",
+          backgroundImage: `url(${arr[index]})`,
           transform: interpolate([rot, scale], trans),
         }}
-      >
-        <animated.img {...bind()} className="cards__img" src={arr[index]} />
-      </animated.div>
+      ></animated.div>
     </animated.div>
   );
 };
 
-export default CardItem
+export default CardItem;
