@@ -12,7 +12,7 @@ function App() {
     <div className="app">
       <FpsView/>
       <UserProvider>
-        <Top />
+        {/* <Top /> */}
         <Pages props={props} />
         <Menu api={api} />
       </UserProvider>
