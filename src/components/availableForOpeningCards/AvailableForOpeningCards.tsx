@@ -16,17 +16,6 @@ const AvailableForOpeningCards = () => {
     userData?.setUser(res.data);
   };
 
-  const open = async () => {
-    await getAdding();
-
-    const res = await $request.get("/cards/open");
-    if (res.data.message) {
-      return console.log(res.data.message);
-    }
-    console.log("Тебе выпало:", res.data.card);
-    userData?.setUser(res.data.user);
-  };
-
   useEffect(() => {
     if (leftTime < 2) {
       setTimeout(() => {
@@ -35,21 +24,10 @@ const AvailableForOpeningCards = () => {
     }
   }, [leftTime]);
 
-  function getNowTime() {
-    const day = new Date().getDate();
-    const hours = new Date().getHours();
-    const minutes = new Date().getMinutes();
-    const seconds = new Date().getSeconds();
 
-    return {
-      string: `${day} ${hours} ${minutes} ${seconds}`,
-      numbers: { day: day, hours: hours, minutes: minutes, seconds: seconds },
-    };
-  }
 
   const beforeTime = userData?.user?.latest_card_adding;
   const splitTime = beforeTime?.split(" ") || [];
-
   const transformatedTime = {
     day: Number(splitTime[0]),
     hours: Number(splitTime[1]),
@@ -66,12 +44,24 @@ const AvailableForOpeningCards = () => {
   };
 
   useEffect(() => {
+    function getNowTime() {
+      const day = new Date().getDate();
+      const hours = new Date().getHours();
+      const minutes = new Date().getMinutes();
+      const seconds = new Date().getSeconds();
+  
+      return {
+        string: `${day} ${hours} ${minutes} ${seconds}`,
+        numbers: { day: day, hours: hours, minutes: minutes, seconds: seconds },
+      };
+    }
+
     const interval = setInterval(() => {
       const time = getNowTime();
       setSecondsPassed(
         timeToSeconds(time.numbers) - timeToSeconds(transformatedTime)
       );
-    }, 1000);
+    }, 900);
 
     if (userData?.user?.card_for_opening > 4) {
       clearInterval(interval);

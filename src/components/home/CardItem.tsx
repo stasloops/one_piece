@@ -4,9 +4,9 @@ import { animated, to as interpolate } from "@react-spring/web";
 import cardImage from "../../assets/card.jpg";
 import { useUser } from "../../hooks/useUser";
 
-const arr: string[] = [];
 
-for (let i = 0; i < 5; i++) {
+const arr: string[] = [];
+for (let i = 0; i < 15; i++) {
   arr.push(cardImage);
 }
 
@@ -26,6 +26,7 @@ const CardItem: FC<Props> = ({
 }) => {
   const { x, y, rot, scale } = props;
   const userData: any = useUser();
+  
   const bind = useDrag(({ down, movement: [mx], swipe: [swipeX] }) => {
     api.start((i: any) => {
       if (i !== index) {
@@ -34,14 +35,19 @@ const CardItem: FC<Props> = ({
       return {
         x: swipeX !== 0 ? (swipeX < 0 ? -500 : 500) : down ? mx : 0,
         scale: down ? 1.1 : 1,
-        // immediate: down
+        rot: 0
       };
     });
 
     if (!down && swipeX !== 0) {
       openNewCard();
       if (userData.user.card_for_opening) {
-        droppedСardApi.start(() => ({ y: 0, x: 0 }));
+        droppedСardApi.start(() => ({
+          y: 0,
+          x: 0,
+          rot: -8 + Math.random() * 16,
+          scale: 1,
+        }));
       }
     }
   });
@@ -72,4 +78,4 @@ const CardItem: FC<Props> = ({
   );
 };
 
-export default CardItem;
+export default CardItem

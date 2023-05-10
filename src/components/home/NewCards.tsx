@@ -1,35 +1,32 @@
-import { animated, useSpring, useSprings } from "@react-spring/web";
+import { useSpring, useSprings } from "@react-spring/web";
 import "../../styles/components/home/newCards.css";
-import cardImage from "../../assets/card.jpg";
 import CardItem from "./CardItem";
-import { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { $request } from "../../api/request";
 import { useUser } from "../../hooks/useUser";
-
-const arr: string[] = [];
-
-for (let i = 0; i < 5; i++) {
-  arr.push(cardImage);
-}
+import DropDownCard from "./DropDownCard";
 
 const to = (i: number) => ({
   x: 0,
   y: i * -4,
   scale: 1,
-  rot: -10 + Math.random() * 10,
-  delay: i * 150,
+  rot: -8 + Math.random() * 16,
+  delay: i * 300,
 });
 
 const from = (_i: number) => ({ x: 0, rot: 0, scale: 2, y: -1000 });
 
 const NewCards = () => {
   const userData: any = useUser();
+  if (!userData) {
+    return null;
+  }
 
   const [droppedCardInfo, setDroppedCardInfo] = useState<any>({});
   const [droppedСardProps, droppedСardApi] = useSpring(() => ({
-    from: { y: -1000 },
+    from: { y: -1000, x: 0, rot: -10 + Math.random() * 10, scale: 1 },
   }));
-  const [props, api] = useSprings(arr.length, (i) => ({
+  const [props, api] = useSprings(5, (i) => ({
     from: from(i),
     ...to(i),
   }));
@@ -42,7 +39,7 @@ const NewCards = () => {
     userData?.setUser(res.data);
   };
 
-  const openNewCard = async () => {
+  const openNewCard = useCallback(async () => {
     await getAdding();
 
     const res = await $request.get("/cards/open");
@@ -52,21 +49,23 @@ const NewCards = () => {
     console.log("Тебе выпало:", res.data.card);
     setDroppedCardInfo(res.data.card);
     userData?.setUser(res.data.user);
-  };
+  }, []);
 
   const cleanupDroppedCard = () => {
-    droppedСardApi.start(() => ({ y: 0, x: -1000 }));
+    droppedСardApi.start(() => ({ y: 0, x: -500 }));
+    setTimeout(() => {
+      droppedСardApi.start(() => ({ y: -1000, x: 0 }));
+    }, 200);
   };
 
   return (
     <div className="cards">
-      <animated.div
-        onClick={cleanupDroppedCard}
-        className="cards__dropdown_card"
-        style={{ ...droppedСardProps }}
-      >
-        {droppedCardInfo.name} - {droppedCardInfo.rarity} - {droppedCardInfo.id}
-      </animated.div>
+      <DropDownCard
+        droppedСardProps={droppedСardProps}
+        cleanupDroppedCard={cleanupDroppedCard}
+        droppedСardApi={droppedСardApi}
+        droppedCardInfo={droppedCardInfo}
+      />
       {props.map((props, i) => (
         <CardItem
           droppedСardApi={droppedСardApi}

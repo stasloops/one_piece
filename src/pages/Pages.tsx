@@ -3,6 +3,7 @@ import Home from "./Home";
 import "../styles/pages/pages.css";
 import { animated } from "@react-spring/web";
 import cardImage from "../assets/bg.png";
+import Cards from "./Cards";
 
 const pages = [
   { id: 1, page: Home, bg: "red" },
@@ -21,19 +22,19 @@ const Pages: FC<Props> = ({ props }) => {
     <div className="pages">
       <animated.div style={{ ...props }} className="pages__box">
         <div className="pages__item">
-          <Home />
+          {/* <Home /> */}
+        </div>
+        <div className="pages__item">
+          <Cards />
         </div>
         <div className="pages__item">
           <Home />
         </div>
         <div className="pages__item">
-          <Home />
+          {/* <Home /> */}
         </div>
         <div className="pages__item">
-          <Home />
-        </div>
-        <div className="pages__item">
-          <Home />
+          {/* <Home /> */}
         </div>
       </animated.div>
     </div>

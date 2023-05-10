@@ -1,7 +1,7 @@
 import React from "react";
 import { useUser } from "../../hooks/useUser";
 import "../../styles/components/top/bounty.css";
-
+import wanted from "../../assets/wanted.png";
 const bely = (
   <svg
     id="svg"
@@ -26,7 +26,9 @@ const Bounty = () => {
   const userData: any = useUser();
   return (
     <div className="bounty">
-      <span className="bounty__icon">{bely}</span>
+      <span>
+        <img className="bounty__icon" src={wanted} />
+      </span>
       <span className="bounty__value">{userData?.user?.bounty}</span>
     </div>
   );
