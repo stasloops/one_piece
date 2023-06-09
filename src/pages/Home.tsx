@@ -17,7 +17,7 @@ const Home = () => {
     >
       {/* <Deck /> */}
       <NewCards />
-      {/* <AvailableForOpeningCards /> */}
+      <AvailableForOpeningCards />
     </div>
   );
 };
